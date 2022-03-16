@@ -5,23 +5,25 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { productActionCreators } from "./redux/reducers/products/reducer";
 import { RootState } from "./redux/reducers/rootReducer";
+import { companyActionCreators } from "./redux/reducers/companies/reducer";
+import Footer from "./components/Footer";
 
 function App() {
 
   const dispatch = useDispatch()
-  const products = useSelector((state: RootState) => state.product)
 
   useEffect(() => {
     dispatch(productActionCreators.fetchStart())
+    dispatch(companyActionCreators.fetchStart())
   }, [dispatch])
 
 
-  console.log(products)
   
   return (
     <AppLayout> 
       <Header />
       <ProductList />
+      <Footer />
     </AppLayout>
   );
 }
