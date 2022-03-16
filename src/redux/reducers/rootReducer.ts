@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux'
+import companiesReducer from './companies/reducer'
 import productsReducer from './products/reducer'
 
 const rootReducer = combineReducers({
   product: productsReducer,
+  company: companiesReducer
   
 })
 
