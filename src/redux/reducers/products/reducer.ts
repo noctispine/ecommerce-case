@@ -1,6 +1,6 @@
 // Constants
 
-import { Reducer } from "redux"
+import { Reducer } from 'redux'
 
 export const FETCH_PRODUCTS_START = 'FETCH_PRODUCTS_START'
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS'
@@ -24,7 +24,6 @@ export interface IProductState {
   error: string | null
   loading: boolean
 }
-
 
 export interface IFetchProductsStartAction {
   type: 'FETCH_PRODUCTS_START'
@@ -55,11 +54,10 @@ export type FetchProductsFailCreator = (
 
 // Initial State
 const initialState: IProductState = {
-    products: [],
-    error: null,
-    loading: false,
-  }
-
+  products: [],
+  error: null,
+  loading: false,
+}
 
 // Reducer
 
@@ -84,15 +82,11 @@ const fetchStart: FetchProductsStartCreator = () => {
   return { type: FETCH_PRODUCTS_START }
 }
 
-const fetchSuccess: FetchProductsSuccessCreator = (
-  products: IProduct[]
-) => {
+const fetchSuccess: FetchProductsSuccessCreator = (products: IProduct[]) => {
   return { type: FETCH_PRODUCTS_SUCCESS, payload: products }
 }
 
-const fetchFail: FetchProductsFailCreator = (
-  error: string
-) => {
+const fetchFail: FetchProductsFailCreator = (error: string) => {
   return { type: FETCH_PRODUCTS__FAIL, payload: error }
 }
 
