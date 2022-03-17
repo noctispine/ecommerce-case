@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { filterActionCreators } from '../../../../redux/reducers/filters/reducer'
 import { RootState } from '../../../../redux/reducers/rootReducer'
@@ -21,9 +21,7 @@ const Tags = (props: Props) => {
 
   const dispacth = useDispatch()
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let search = e.target as HTMLInputElement
-  }
+  const [searchQuery, setSearchQuery] = useState('')
 
   const handleAddFilterTag = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target
@@ -44,7 +42,10 @@ const Tags = (props: Props) => {
     <FilterContainer>
       Tags
       <InputContainer>
-        <SearchInput placeholder="Search Tag" onChange={handleSearch} />
+        <SearchInput
+          placeholder="Search Tag"
+          onChange={(e) => setSearchQuery(e.target.value)}
+        />
         <ListContainer>
           <TagItem
             key={tagsWithTotal.total + 1}
@@ -53,15 +54,29 @@ const Tags = (props: Props) => {
             isChecked={tagFilters.length === 0}
             handleAddFilterTag={handleAddFilterTag}
           />
-          {tagsWithTotal.tags.map((tag, indx) => (
-            <TagItem
-              key={indx}
-              name={tag.name}
-              quantity={tag.quantity}
-              isChecked={tagFilters.includes(tag.name)}
-              handleAddFilterTag={handleAddFilterTag}
-            />
-          ))}
+          {
+            // first filter wrt search bar
+            // then map them into items
+            tagsWithTotal.tags
+              .filter((tag) => {
+                if (searchQuery === '') return tag
+                else if (
+                  tag.name
+                    .toLocaleLowerCase()
+                    .includes(searchQuery.toLocaleLowerCase())
+                )
+                  return tag
+              })
+              .map((tag, indx) => (
+                <TagItem
+                  key={indx}
+                  name={tag.name}
+                  quantity={tag.quantity}
+                  isChecked={tagFilters.includes(tag.name)}
+                  handleAddFilterTag={handleAddFilterTag}
+                />
+              ))
+          }
         </ListContainer>
       </InputContainer>
     </FilterContainer>
