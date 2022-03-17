@@ -30,7 +30,7 @@ export const usePagination: PaginationHook = ({
   currentPage,
 }) => {
   const paginationRange: (number | string)[] | undefined = useMemo(() => {
-    const totalPageCount = Math.ceil(totalCount / pageSize)
+    const totalPageCount = Math.round(totalCount / pageSize)
     const totalPageNumbers = neighborCount + 5
 
     if (totalPageNumbers >= totalPageCount) {
@@ -59,7 +59,7 @@ export const usePagination: PaginationHook = ({
       let rightItemCount = 3 + 2 * neighborCount
       let rightRange = range(
         totalPageCount - rightItemCount + 1,
-        totalPageCount-1
+        totalPageCount - 1
       )
       return [firstPageIndex, DOTS, ...rightRange]
     }
