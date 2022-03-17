@@ -47,14 +47,18 @@ const Pagination = ({
       <PaginationUl>
         {/* left arrow */}
         <ListItemGroup arrow={true}>
-          <PaginationItem disabled={currentPage === 1} onClick={onPrev} arrow={true}>
+          <PaginationItem
+            disabled={currentPage === 1}
+            onClick={onPrev}
+            arrow={true}
+          >
             Prev
           </PaginationItem>
         </ListItemGroup>
 
         <ListItemGroup>
           {paginationRange.map((pageNumber, index) => {
-            if (pageNumber === 0) {
+            if (pageNumber === DOTS) {
               return <PaginationItem key={index}>...</PaginationItem>
             }
             return (
@@ -70,7 +74,11 @@ const Pagination = ({
         </ListItemGroup>
         {/* right arrow */}
         <ListItemGroup arrow={true}>
-          <PaginationItem onClick={onNext} disabled={currentPage === lastPage} arrow={true}>
+          <PaginationItem
+            onClick={onNext}
+            disabled={currentPage === lastPage}
+            arrow={true}
+          >
             Next
           </PaginationItem>
         </ListItemGroup>
