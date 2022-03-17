@@ -1,6 +1,10 @@
-import { IFilterState } from './types'
+import { FilterStateType, IFilterState } from './types'
 
 type FilterFunc = (state: IFilterState, payload: string) => IFilterState
+type FilterAllFunc = (
+  state: IFilterState,
+  payload: FilterStateType
+) => IFilterState
 
 export const addFilterBrand: FilterFunc = (state, payload) => {
   let newBrands = state.brands
@@ -44,4 +48,22 @@ export const removeFilterItemType: FilterFunc = (state, payload) => {
   let newState = { ...state }
   newState.itemType = ''
   return newState
+}
+
+export const removeAll: FilterAllFunc = (state, payload) => {
+  let newState = { ...state }
+  switch (payload) {
+    case 'tags': {
+      newState.tags = []
+      return newState
+    }
+
+    case 'brands': {
+      newState.brands = []
+      return newState
+    }
+
+    default:
+      return state
+  }
 }

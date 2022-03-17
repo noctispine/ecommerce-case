@@ -5,6 +5,7 @@ import {
   addFilterBrand,
   addFilterItemType,
   addFilterTag,
+  removeAll,
   removeFilterBrand,
   removeFilterItemType,
   removeFilterTag,
@@ -14,6 +15,7 @@ import {
   AddFilterTagCreator,
   FilterAction,
   IFilterState,
+  RemoveAllFiltersFromSpecificTypeCreator,
   RemoveFilterItemTypeCreator,
   RemoveFilterTagCreator,
 } from './types'
@@ -27,6 +29,9 @@ export const ADD_FILTER_ITEMTYPE = 'ADD_FILTER_ITEMTYPE'
 export const REMOVE_FILTER_BRAND = 'REMOVE_FILTER_BRAND'
 export const REMOVE_FILTER_TAG = 'REMOVE_FILTER_TAG'
 export const REMOVE_FILTER_ITEMTYPE = 'REMOVE_FILTER_ITEMTYPE'
+
+export const REMOVE_ALL_FILTERS_FROM_SPECIFIC_TYPE =
+  'REMOVE_ALL_FILTERS_FROM_SPECIFIC_TYPE'
 
 const initialState: IFilterState = {
   brands: [],
@@ -59,6 +64,9 @@ const filterReducer: Reducer<IFilterState, FilterAction> = (
     case REMOVE_FILTER_ITEMTYPE:
       return removeFilterItemType(state, action.payload)
 
+    case REMOVE_ALL_FILTERS_FROM_SPECIFIC_TYPE:
+      return removeAll(state, action.payload)
+
     default:
       return state
   }
@@ -79,12 +87,18 @@ const addFilterItemTypeCreator: AddFilterItemTypeCreator = (itemType) => {
 }
 
 const removeFilterItemTypeCreator: RemoveFilterItemTypeCreator = (itemType) => {
-  return {type: REMOVE_FILTER_ITEMTYPE, payload: itemType}
-} 
+  return { type: REMOVE_FILTER_ITEMTYPE, payload: itemType }
+}
+
+const removeAllFiltersFromSpecificTypeCreator: RemoveAllFiltersFromSpecificTypeCreator =
+  (typeName) => {
+    return { type: REMOVE_ALL_FILTERS_FROM_SPECIFIC_TYPE, payload: typeName }
+  }
 
 export const filterActionCreators = {
   addFilterTagCreator,
   removeFilterTagCreator,
   addFilterItemTypeCreator,
-  removeFilterItemTypeCreator
+  removeFilterItemTypeCreator,
+  removeAllFiltersFromSpecificTypeCreator,
 }
