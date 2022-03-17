@@ -9,8 +9,14 @@ import {
   capitalizeFirstLetter,
   replaceAllAndToLowerCase,
 } from '../../../../utils/stringFormatters'
-import { FilterContainer, InputContainer } from '../../style'
-import { InputSort, LabelSort } from './style'
+import {
+  CheckBox,
+  CheckBoxContainer,
+  FilterContainer,
+  InputContainer,
+  LabelCheckBox,
+  ListContainer,
+} from '../../style'
 
 type Props = {}
 
@@ -33,27 +39,28 @@ const Sorting = (props: Props) => {
   return (
     <FilterContainer isSort>
       Sorting
-      <InputContainer>
-        {defaultSortTypes.map((sortType, indx) => {
-          return (
-            <p>
-              <InputSort
-                type="checkbox"
-                name="sort"
-                value={sortType}
-                id={sortType}
-                key={indx}
-                onChange={radioHandler}
-                checked={sortType === sortState.sort}
-              />
-              <LabelSort key={indx} htmlFor={sortType}>
-                {capitalizeFirstLetter(
-                  replaceAllAndToLowerCase(sortType, '_', ' ')
-                )}
-              </LabelSort>
-            </p>
-          )
-        })}
+      <InputContainer isSort>
+        <ListContainer>
+          {defaultSortTypes.map((sortType, indx) => {
+            return (
+              <CheckBoxContainer>
+                <CheckBox
+                  type="checkbox"
+                  name="sort"
+                  value={sortType}
+                  id={sortType}
+                  onChange={radioHandler}
+                  checked={sortType === sortState.sort}
+                />
+                <LabelCheckBox htmlFor={sortType}>
+                  {capitalizeFirstLetter(
+                    replaceAllAndToLowerCase(sortType, '_', ' ')
+                  )}
+                </LabelCheckBox>
+              </CheckBoxContainer>
+            )
+          })}
+        </ListContainer>
       </InputContainer>
     </FilterContainer>
   )
