@@ -1,6 +1,13 @@
+export type FilterStateType = 'brands' | 'tags'
+
 export interface IAddFilterBrandAction {
   type: 'ADD_FILTER_BRAND'
   payload: string
+}
+
+export interface IRemoveAllFiltersFromSpecificType {
+  type: 'REMOVE_ALL_FILTERS_FROM_SPECIFIC_TYPE'
+  payload: FilterStateType
 }
 
 export interface IRemoveFilterBrandAction {
@@ -41,6 +48,7 @@ export type FilterAction =
   | IRemoveFilterTagAction
   | IAddFilterItemTypeAction
   | IRemoveFilterItemTypeAction
+  | IRemoveAllFiltersFromSpecificType
 
 // Action Creators
 
@@ -52,7 +60,13 @@ export type RemoveFilterBrandCreator = (
 export type AddFilterTagCreator = (tag: string) => IAddFilterTagAction
 export type RemoveFilterTagCreator = (tag: string) => IRemoveFilterTagAction
 
-export type AddFilterItemTypeCreator = (itemType: string) => IAddFilterItemTypeAction
+export type AddFilterItemTypeCreator = (
+  itemType: string
+) => IAddFilterItemTypeAction
 export type RemoveFilterItemTypeCreator = (
   itemType: string
 ) => IRemoveFilterItemTypeAction
+
+export type RemoveAllFiltersFromSpecificTypeCreator = (
+  typeName: FilterStateType
+) => IRemoveAllFiltersFromSpecificType
