@@ -10,6 +10,7 @@ import {
 import { filterActionCreators } from '../../redux/reducers/filters/reducer'
 import {
   IProduct,
+  productActionCreators,
 } from '../../redux/reducers/products/reducer'
 import { RootState } from '../../redux/reducers/rootReducer'
 import { Sort } from '../../redux/reducers/sort/reducer'
@@ -31,6 +32,14 @@ const filterByItemType = (products: IProduct[], type: string) => {
   }
 
   return products
+}
+
+const filterByTags = (products: IProduct[], tagsFilter: string[]) => {
+  if (tagsFilter.length === 0) return products
+
+  return products.filter((product) =>
+    tagsFilter.every((tagFilter) => product.tags.includes(tagFilter))
+  )
 }
 
 const sortProducts = (products: IProduct[], sortType: Sort) => {
@@ -62,14 +71,19 @@ const ProductList = (props: Props) => {
   const sortState = useSelector((state: RootState) => state.sort)
   const sortType = sortState.sort
 
-  const filteredProducts = useMemo(
+  const typeFilteredProducts = useMemo(
     () => filterByItemType(products, itemType),
     [products, itemType]
   )
 
+  const tagFilteredProducts = useMemo(
+    () => filterByTags(typeFilteredProducts, filterState.tags),
+    [typeFilteredProducts, filterState]
+  )
+
   const sortedProducts = useMemo(
-    () => sortProducts(filteredProducts, sortType),
-    [sortType, filteredProducts]
+    () => sortProducts(tagFilteredProducts, sortType),
+    [sortType, tagFilteredProducts]
   )
 
   const [currentPage, setCurrentPage] = useState<number>(1)
@@ -77,7 +91,11 @@ const ProductList = (props: Props) => {
   // set current page to if user sorts or filters
   useEffect(() => {
     setCurrentPage(1)
-  }, [filteredProducts])
+  }, [sortedProducts])
+
+  useEffect(() => {
+    dispatch(productActionCreators.updateTags(tagFilteredProducts))
+  }, [tagFilteredProducts])
 
   const pageSize = 16
 
@@ -103,12 +121,13 @@ const ProductList = (props: Props) => {
       <Title>Products</Title>
       <ItemTypeContainer>
         {/* If tags include provided item type then change its style with isSelected*/}
-        {defaultItemTypes.map((defaultItemType) => {
+        {defaultItemTypes.map((defaultItemType, indx) => {
           return (
             <Button
               isSelected={defaultItemType === itemType}
               name={defaultItemType}
               onClick={handleOnClick}
+              key={indx}
             >
               {defaultItemType}
             </Button>
