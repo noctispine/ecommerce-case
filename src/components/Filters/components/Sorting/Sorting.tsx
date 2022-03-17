@@ -17,11 +17,17 @@ type Props = {}
 const Sorting = (props: Props) => {
   const dispatch = useDispatch()
   const sortState = useSelector((state: RootState) => state.sort)
+
+  // if target val is already in sort state change it with the null value to
+  // disable sorting, otherwise just put the value into sorting state
   const radioHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
     // e.preventDefault()
-
     let button = e.target as HTMLInputElement
-    dispatch(selectSortActionCreator(button.value as Sort))
+    if (sortState.sort === button.value) {
+      dispatch(selectSortActionCreator(null))
+    } else {
+      dispatch(selectSortActionCreator(button.value as Sort))
+    }
   }
 
   return (
