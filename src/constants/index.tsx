@@ -10,6 +10,7 @@ interface ITheme {
   outlineGray: string
   smokeyGray: string
   htmlBackground: string
+  scrollBarGray: string
 }
 
 export const theme: ITheme = {
@@ -24,6 +25,7 @@ export const theme: ITheme = {
   outlineGray: '#E5E5E5',
   smokeyGray: '#697488',
   htmlBackground: '#FAFAFA',
+  scrollBarGray: '#E0E0E0',
 }
 
 export const baseURL: string = 'http://localhost:3004'
