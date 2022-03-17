@@ -7,6 +7,8 @@ export const FETCH_PRODUCTS_START = 'FETCH_PRODUCTS_START'
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS'
 export const FETCH_PRODUCTS__FAIL = 'FETCH_PRODUCTS_FAIL'
 
+export const UPDATE_TAGS = 'UPDATE_TAGS'
+
 // Interfaces
 
 export interface IProduct {
@@ -51,10 +53,16 @@ export interface IFetchProductsFailAction {
   payload: string
 }
 
+export interface IUpdateTagsAction {
+  type: 'UPDATE_TAGS'
+  payload: IProduct[]
+}
+
 type FetchProductsAction =
   | IFetchProductsStartAction
   | IFetchProductsSuccessAction
   | IFetchProductsFailAction
+  | IUpdateTagsAction
 
 export type FetchProductsStartCreator = () => IFetchProductsStartAction
 export type FetchProductsSuccessCreator = (
@@ -63,6 +71,8 @@ export type FetchProductsSuccessCreator = (
 export type FetchProductsFailCreator = (
   error: string
 ) => IFetchProductsFailAction
+
+export type UpdateTagsCreator = (products: IProduct[]) => IUpdateTagsAction
 
 // Initial State
 const initialState: IProductState = {
@@ -85,12 +95,23 @@ const productsReducer: Reducer<IProductState, FetchProductsAction> = (
   switch (action.type) {
     case FETCH_PRODUCTS_START:
       return { ...state, loading: true }
+
     case FETCH_PRODUCTS_SUCCESS: {
       let populatedTags = populateTags(action.payload)
-      return { ...state, loading: false, products: action.payload, tags: populatedTags }
+      return {
+        ...state,
+        loading: false,
+        products: action.payload,
+        tags: populatedTags,
+      }
     }
+
     case FETCH_PRODUCTS__FAIL:
       return { ...state, loading: false, error: action.payload }
+
+    case UPDATE_TAGS:
+      return { ...state, tags: populateTags(action.payload) }
+
     default:
       return state
   }
@@ -109,10 +130,15 @@ const fetchFail: FetchProductsFailCreator = (error: string) => {
   return { type: FETCH_PRODUCTS__FAIL, payload: error }
 }
 
+const updateTags: UpdateTagsCreator = (products) => {
+  return { type: UPDATE_TAGS, payload: products }
+}
+
 export const productActionCreators = {
   fetchStart,
   fetchSuccess,
   fetchFail,
+  updateTags,
 }
 
 export default productsReducer
