@@ -1,6 +1,7 @@
 // Constants
 
 import { Reducer } from 'redux'
+import { populateTags } from './reducerHelper'
 
 export const FETCH_PRODUCTS_START = 'FETCH_PRODUCTS_START'
 export const FETCH_PRODUCTS_SUCCESS = 'FETCH_PRODUCTS_SUCCESS'
@@ -19,8 +20,19 @@ export interface IProduct {
   itemType: string
 }
 
+export interface ITag {
+  name: string
+  quantity: number
+}
+
+export interface ITagsWithTotal {
+  tags: ITag[]
+  total: number
+}
+
 export interface IProductState {
-  products: IProduct[] | []
+  products: IProduct[]
+  tags: ITagsWithTotal
   error: string | null
   loading: boolean
 }
@@ -55,6 +67,11 @@ export type FetchProductsFailCreator = (
 // Initial State
 const initialState: IProductState = {
   products: [],
+  tags: {
+    tags: [],
+    total: 0,
+  },
+
   error: null,
   loading: false,
 }
@@ -68,8 +85,10 @@ const productsReducer: Reducer<IProductState, FetchProductsAction> = (
   switch (action.type) {
     case FETCH_PRODUCTS_START:
       return { ...state, loading: true }
-    case FETCH_PRODUCTS_SUCCESS:
-      return { ...state, loading: false, products: action.payload }
+    case FETCH_PRODUCTS_SUCCESS: {
+      let populatedTags = populateTags(action.payload)
+      return { ...state, loading: false, products: action.payload, tags: populatedTags }
+    }
     case FETCH_PRODUCTS__FAIL:
       return { ...state, loading: false, error: action.payload }
     default:
