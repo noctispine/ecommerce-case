@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux'
+import cartReducer from './cart/reducer'
 import companiesReducer from './companies/reducer'
 import filterReducer from './filters/reducer'
 import productsReducer from './products/reducer'
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
   company: companiesReducer,
   filter: filterReducer,
   sort: sortReducer,
+  cart: cartReducer,
 })
 
 export default rootReducer
