@@ -34,7 +34,7 @@ export const usePagination: PaginationHook = ({
     const totalPageNumbers = neighborCount + 5
 
     if (totalPageNumbers >= totalPageCount) {
-      return range(1, totalPageCount)
+      return range(1, totalPageCount-1)
     }
 
     const leftNeighborIndex = Math.max(currentPage - neighborCount, 1)
