@@ -1,7 +1,7 @@
 // Constants
 
 import { Reducer } from 'redux'
-import { IProduct } from '../products/reducer'
+import { IProduct } from '../products/reducerHelper'
 import {
   computeCompaniesWithAmounts,
   FetchCompaniesAction,
