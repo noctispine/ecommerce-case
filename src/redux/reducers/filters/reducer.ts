@@ -11,11 +11,13 @@ import {
   removeFilterTag,
 } from './reducerHelpers'
 import {
+  AddFilterBrandCreator,
   AddFilterItemTypeCreator,
   AddFilterTagCreator,
   FilterAction,
   IFilterState,
   RemoveAllFiltersFromSpecificTypeCreator,
+  RemoveFilterBrandCreator,
   RemoveFilterItemTypeCreator,
   RemoveFilterTagCreator,
 } from './types'
@@ -74,31 +76,41 @@ const filterReducer: Reducer<IFilterState, FilterAction> = (
 
 export default filterReducer
 
-const addFilterTagCreator: AddFilterTagCreator = (tag) => {
+const addTagCreator: AddFilterTagCreator = (tag) => {
   return { type: ADD_FILTER_TAG, payload: tag }
 }
 
-const removeFilterTagCreator: RemoveFilterTagCreator = (tag) => {
+const removeTagCreator: RemoveFilterTagCreator = (tag) => {
   return { type: REMOVE_FILTER_TAG, payload: tag }
 }
 
-const addFilterItemTypeCreator: AddFilterItemTypeCreator = (itemType) => {
+const addItemTypeCreator: AddFilterItemTypeCreator = (itemType) => {
   return { type: ADD_FILTER_ITEMTYPE, payload: itemType }
 }
 
-const removeFilterItemTypeCreator: RemoveFilterItemTypeCreator = (itemType) => {
+const removeItemTypeCreator: RemoveFilterItemTypeCreator = (itemType) => {
   return { type: REMOVE_FILTER_ITEMTYPE, payload: itemType }
 }
 
-const removeAllFiltersFromSpecificTypeCreator: RemoveAllFiltersFromSpecificTypeCreator =
+const addBrandCreator: AddFilterBrandCreator = (brand) => {
+  return { type: ADD_FILTER_BRAND, payload: brand }
+}
+
+const removeBrandCreator: RemoveFilterBrandCreator = (brand) => {
+  return { type: REMOVE_FILTER_BRAND, payload: brand }
+}
+
+const removeAllFilterCreator: RemoveAllFiltersFromSpecificTypeCreator =
   (typeName) => {
     return { type: REMOVE_ALL_FILTERS_FROM_SPECIFIC_TYPE, payload: typeName }
   }
 
 export const filterActionCreators = {
-  addFilterTagCreator,
-  removeFilterTagCreator,
-  addFilterItemTypeCreator,
-  removeFilterItemTypeCreator,
-  removeAllFiltersFromSpecificTypeCreator,
+  addTagCreator,
+  removeTagCreator,
+  addItemTypeCreator,
+  removeItemTypeCreator,
+  addBrandCreator,
+  removeBrandCreator,
+  removeAllFilterCreator,
 }
