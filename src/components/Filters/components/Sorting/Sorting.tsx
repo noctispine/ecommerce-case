@@ -12,11 +12,10 @@ import {
 import {
   CheckBox,
   CheckBoxContainer,
-  FilterContainer,
-  InputContainer,
   LabelCheckBox,
   ListContainer,
 } from '../../style'
+import SharedFilterContainer from '../SharedComponents/SharedFilterContainer'
 
 type Props = {}
 
@@ -37,13 +36,11 @@ const Sorting = (props: Props) => {
   }
 
   return (
-    <FilterContainer isSort>
-      Sorting
-      <InputContainer isSort>
-        <ListContainer>
+    <SharedFilterContainer title="Sorting" isSort>
+        <ListContainer isSort>
           {defaultSortTypes.map((sortType, indx) => {
             return (
-              <CheckBoxContainer>
+              <CheckBoxContainer key={indx}>
                 <CheckBox
                   type="checkbox"
                   name="sort"
@@ -61,8 +58,7 @@ const Sorting = (props: Props) => {
             )
           })}
         </ListContainer>
-      </InputContainer>
-    </FilterContainer>
+    </SharedFilterContainer>
   )
 }
 
