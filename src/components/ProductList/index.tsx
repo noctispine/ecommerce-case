@@ -7,11 +7,11 @@ import {
   PRICE_HIGH_TO_LOW,
   PRICE_LOW_TO_HIGH,
 } from '../../constants'
+import { companyActionCreators } from '../../redux/reducers/companies/reducer'
+import { ICompany } from '../../redux/reducers/companies/reducerHelpers'
 import { filterActionCreators } from '../../redux/reducers/filters/reducer'
-import {
-  IProduct,
-  productActionCreators,
-} from '../../redux/reducers/products/reducer'
+import { productActionCreators } from '../../redux/reducers/products/reducer'
+import { IProduct } from '../../redux/reducers/products/reducerHelper'
 import { RootState } from '../../redux/reducers/rootReducer'
 import { Sort } from '../../redux/reducers/sort/reducer'
 import Pagination from './components/Pagination/Pagination'
@@ -34,12 +34,24 @@ const filterByItemType = (products: IProduct[], type: string) => {
   return products
 }
 
-const filterByTags = (products: IProduct[], tagsFilter: string[]) => {
-  if (tagsFilter.length === 0) return products
+const filterByTags = (products: IProduct[], tags: string[]) => {
+  if (tags.length === 0) return products
 
   return products.filter((product) =>
-    tagsFilter.every((tagFilter) => product.tags.includes(tagFilter))
+    tags.every((tag) => product.tags.includes(tag))
   )
+}
+
+const filterByBrands = (
+  products: IProduct[],
+  companies: ICompany[],
+  brands: string[]
+) => {
+  if (brands.length === 0) return products
+  const slugs = companies.map((company) => {
+    if (brands.includes(company.name)) return company.slug
+  })
+  return products.filter((product) => slugs.includes(product.manufacturer))
 }
 
 const sortProducts = (products: IProduct[], sortType: Sort) => {
@@ -65,6 +77,9 @@ const ProductList = (props: Props) => {
   const productState = useSelector((state: RootState) => state.product)
   let products = productState.products
 
+  const companyState = useSelector((state: RootState) => state.company)
+  const companies = companyState.companies
+
   const filterState = useSelector((state: RootState) => state.filter)
   const itemType = filterState.itemType
 
@@ -81,27 +96,36 @@ const ProductList = (props: Props) => {
     [typeFilteredProducts, filterState]
   )
 
+  const brandFilteredProducts = useMemo(
+    () => filterByBrands(tagFilteredProducts, companies, filterState.brands),
+    [tagFilteredProducts, filterState]
+  )
+
   const sortedProducts = useMemo(
-    () => sortProducts(tagFilteredProducts, sortType),
-    [sortType, tagFilteredProducts]
+    () => sortProducts(brandFilteredProducts, sortType),
+    [sortType, brandFilteredProducts]
   )
 
   const [currentPage, setCurrentPage] = useState<number>(1)
 
-  // set current page to if user sorts or filters
+  // set current page to 1 if user sorts or filters
   useEffect(() => {
     setCurrentPage(1)
   }, [sortedProducts])
 
+  // set new amounts of tags and brands
   useEffect(() => {
-    dispatch(productActionCreators.updateTags(tagFilteredProducts))
-  }, [tagFilteredProducts])
+    dispatch(productActionCreators.updateTags(brandFilteredProducts))
+    dispatch(
+      companyActionCreators.updateCompaniesAndAmountsCreator(brandFilteredProducts)
+    )
+  }, [tagFilteredProducts, brandFilteredProducts])
 
   const pageSize = 16
 
   const dispatch = useDispatch()
 
-  // dispachtes add type if selecedted type is already in filter state
+  // dispachtes add filter type, if selecedted type is already in filter state
   // it removes the filter
   const handleOnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
@@ -109,9 +133,9 @@ const ProductList = (props: Props) => {
     let button = e.target as HTMLInputElement
     let type = button.name
     if (itemType === '' || itemType !== type) {
-      dispatch(filterActionCreators.addFilterItemTypeCreator(type))
+      dispatch(filterActionCreators.addItemTypeCreator(type))
     } else {
-      dispatch(filterActionCreators.removeFilterItemTypeCreator(type))
+      dispatch(filterActionCreators.removeItemTypeCreator(type))
     }
   }
 
