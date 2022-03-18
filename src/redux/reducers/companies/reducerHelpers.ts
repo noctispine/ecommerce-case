@@ -1,4 +1,4 @@
-import { IProduct } from '../products/reducer'
+import { IProduct } from '../products/reducerHelper'
 
 // Interfaces
 export interface ICompany {
@@ -13,8 +13,13 @@ export interface ICompany {
 }
 
 export interface ICompanyWithAmount {
-  company: ICompany
-  amount: number
+  name: string
+  quantity: number
+}
+
+export interface ICompaniesWithAmountsAndTotal {
+  companiesWithAmounts: ICompanyWithAmount[]
+  total: number
 }
 
 export interface ICompanyState {
@@ -56,9 +61,7 @@ export type FetchCompaniesSuccessCreator = (
   companies: ICompany[]
 ) => IFetchCompaniesSuccessAction
 
-export type FetchCompaniesFailCreator = (
-  error: string
-) => IFetchCompaniesFailAction
+export type FetchCompaniesFailCreator = (error: string) => IFetchCompaniesFailAction
 
 export type UpdateCompaniesAndAmountsCreator = (
   products: IProduct[]
@@ -69,7 +72,6 @@ export type CompaniesWithAmountsAndTotal = {
   total: number
 }
 
-
 export const computeCompaniesWithAmounts = (
   companies: ICompany[],
   products: IProduct[]
@@ -78,9 +80,12 @@ export const computeCompaniesWithAmounts = (
   let companiesWithAmounts: ICompanyWithAmount[] = []
 
   companies.forEach((company) => {
-    let amount = getNumberOfCompany(company, products)
-    total += amount
-    companiesWithAmounts.push({ company, amount })
+    let quantity = getNumberOfCompany(company, products)
+    if (quantity !== 0) {
+      total += quantity
+
+      companiesWithAmounts.push({ name: company.name, quantity })
+    }
   })
 
   return { companiesWithAmounts, total }
