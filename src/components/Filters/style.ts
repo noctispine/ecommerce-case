@@ -9,6 +9,7 @@ export const LabelCheckBox = styled.label`
   color: ${theme.blackFilterContainerText};
   font-size: 1.1rem;
   margin-left: 1rem;
+  font-size: .8rem;
 
   span {
     color: ${theme.lightGrayText};
@@ -38,17 +39,18 @@ export const RadioButtonContainer = styled.div`
   margin-top: 1rem;
 `
 
-export const ListContainer = styled.div`
+export const ListContainer = styled.div<IFilterTypeSelectionProps>`
   height: 9rem;
   margin-right: 1.5rem;
   margin-left: 1.5rem;
   margin-bottom: 1.5rem;
+  margin-top: ${(props) => (props.isSort ? '1.5rem' : '')};
 
   overflow-y: scroll;
 
   display: flex;
   flex-direction: column;
-  row-gap: 1rem;
+  row-gap: .8rem;
 
   ::-webkit-scrollbar {
     width: 0.25rem;
