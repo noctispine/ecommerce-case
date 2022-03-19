@@ -1,6 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import {
+  breakpoints,
   defaultItemTypes,
   NEW_TO_OLD,
   OLD_TO_NEW,
@@ -120,10 +121,9 @@ const ProductList = (props: Props) => {
     dispatch(
       companyActionCreators.updateCompaniesAndAmountsCreator(tagFilteredProducts)
     )
-
   }, [tagFilteredProducts, brandFilteredProducts])
 
-  const pageSize = 16
+  const pageSize = window.innerWidth > parseInt(breakpoints.mobile) ? 16 : 12
 
   const dispatch = useDispatch()
 
