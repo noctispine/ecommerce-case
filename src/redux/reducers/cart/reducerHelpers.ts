@@ -27,8 +27,14 @@ export interface IDecrementItemAction {
 
 export type CartAction = IIncrementItemAction | IDecrementItemAction
 
-export type IncrementCreator = (itemName: string, price: number) => IIncrementItemAction
-export type DecrementCreator = (itemName: string, price: number) => IDecrementItemAction
+export type IncrementCreator = (
+  itemName: string,
+  price: number
+) => IIncrementItemAction
+export type DecrementCreator = (
+  itemName: string,
+  price: number
+) => IDecrementItemAction
 
 export function cartHandler(state: ICartState, action: CartAction) {
   let newState = { ...state }
@@ -36,20 +42,22 @@ export function cartHandler(state: ICartState, action: CartAction) {
   // if the item that will be added is already in cart, it returns the
   // index of it, otherwise returns -1
   const cartItemIndex = state.items.findIndex((item) => item.name === action.name)
+  let newTotal: number = newState.total
 
   // if item has been already added, incerement by one
   if (cartItemIndex !== -1) {
     let oldQuantity = newState.items[cartItemIndex].quantity
     let newQuantity: number
+
     if (action.type === 'INCREMENT_ITEM') {
       newQuantity = oldQuantity + 1
       newState.items[cartItemIndex].quantity = newQuantity
-      newState.total += action.price
+      newTotal += action.price
     } else {
-      newState.total -= action.price
+      newTotal -= action.price
       newQuantity = oldQuantity - 1
+      newState.items[cartItemIndex].quantity = newQuantity
       if (newQuantity === 0) newState.items.splice(cartItemIndex, 1)
-      else newState.items[cartItemIndex].quantity = newQuantity
     }
   } else {
     if (action.type === 'INCREMENT_ITEM') {
@@ -59,15 +67,14 @@ export function cartHandler(state: ICartState, action: CartAction) {
         quantity: 1,
       }
 
-      newState.total += action.price
+      newTotal += action.price
 
       newState.items.push(newItem)
     }
   }
 
-  newState.total = roundToTwo(newState.total)
-
-  return state
+  newState.total = roundToTwo(newTotal)
+  return newState
 }
 
 export function roundToTwo(num: number): number {
