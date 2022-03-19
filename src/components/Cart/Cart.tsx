@@ -11,13 +11,15 @@ import {
   TotalWrapper,
 } from './style'
 
-type Props = {}
+type Props = {
+  showCart: boolean
+}
 
-const Cart = (props: Props) => {
+const Cart = ({showCart}: Props) => {
   const cartState = useSelector((state: RootState) => state.cart)
   const items = cartState.items
   return (
-    <CartContainer>
+    <CartContainer showCart={showCart}>
       <CartList>
         {items.map((item, indx) => (
           <>

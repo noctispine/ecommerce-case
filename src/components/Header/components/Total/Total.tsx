@@ -1,18 +1,25 @@
-import { TotalContainer } from './style'
+import { LogoContainer, TotalContainer } from './style'
 import bag from '../../../../images/bag.svg'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../../../redux/reducers/rootReducer'
-type Props = {}
+import { BsFillCartFill } from 'react-icons/bs'
+type Props = {
+  setShowCart: React.Dispatch<React.SetStateAction<boolean>>
+  showCart: boolean
+}
 
-const Total = (props: Props) => {
+const Total = ({ setShowCart, showCart }: Props) => {
   const cartState = useSelector((state: RootState) => state.cart)
-
 
   return (
     <TotalContainer>
-      <div>
+      <LogoContainer onClick={() => setShowCart(!showCart)}>
+        <BsFillCartFill color="#ffffff" size={20} />
+        <span className="totalVal">₺ {cartState.total}</span>
+      </LogoContainer>
+      <div className="info">
         <img src={bag} alt="bag" />
-        <span>₺ {cartState.total}</span>
+        <span className="totalVal">₺ {cartState.total}</span>
       </div>
     </TotalContainer>
   )

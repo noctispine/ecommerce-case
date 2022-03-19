@@ -1,7 +1,11 @@
 import styled from 'styled-components'
-import { theme } from '../../constants'
+import { breakpoints, theme } from '../../constants'
 
-export const CartContainer = styled.div`
+interface ICartContainerProps {
+  showCart: boolean
+}
+
+export const CartContainer = styled.div<ICartContainerProps>`
   grid-column: 11 / span 3;
   margin-top: 2rem;
   position: sticky;
@@ -9,11 +13,32 @@ export const CartContainer = styled.div`
   height: 20rem;
   max-height: 70vh;
 
+  overflow-x: hidden;
+
   border-radius: 0.125rem;
   border: 0.5rem solid ${theme.primary};
 
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${breakpoints.wide}) {
+    display: ${(props) => (props.showCart ? 'block' : 'none')};
+    z-index: 200;
+
+    position: fixed;
+    top: 4.25rem;
+    right: 0;
+
+    background-color: #ffffff;
+    height: 55vh;
+    width: 50vw;
+  }
+
+  /* @media ((max-width: ${breakpoints.wide}) and min-width: ${breakpoints.mobile}) {
+    display: block;
+    grid-row-start: 2;
+    grid-column-end: 14;
+  } */
 `
 export const TotalWrapper = styled.div`
   /* position: absolute;
@@ -43,7 +68,7 @@ export const TotalContainer = styled.div`
 `
 
 export const CartList = styled.div`
-  height: inherit;
+  height: 30rem;
   margin-top: 1.6rem;
   overflow-y: scroll;
 
@@ -62,6 +87,10 @@ export const CartList = styled.div`
     border-radius: 100px;
     width: 0.8rem;
     height: 4.8rem;
+  }
+
+  @media ${breakpoints.wide} {
+    height: 25vh;
   }
 `
 export const LineWrapper = styled.div`
