@@ -1,6 +1,6 @@
 import { usePagination, DOTS } from '../../../../utils/usePagination'
-// import { GrNext, GrPrevious } from 'react-icons/gr'
-// import { BsThreeDots } from 'react-icons/bs'
+import leftArrow from '../../../../images/leftArrow.svg'
+import rightArrow from '../../../../images/rightArrow.svg'
 import {
   ListItemGroup,
   PaginationItem,
@@ -47,12 +47,8 @@ const Pagination = ({
       <PaginationUl>
         {/* left arrow */}
         <ListItemGroup arrow={true}>
-          <PaginationItem
-            disabled={currentPage === 1}
-            onClick={onPrev}
-            arrow={true}
-          >
-            Prev
+          <PaginationItem disabled={currentPage === 1} onClick={onPrev} arrow={true}>
+            <img src={leftArrow} alt="left-arrow" /> Prev
           </PaginationItem>
         </ListItemGroup>
 
@@ -79,7 +75,7 @@ const Pagination = ({
             disabled={currentPage === lastPage}
             arrow={true}
           >
-            Next
+            Next<img src={rightArrow} alt="right-arrow" />
           </PaginationItem>
         </ListItemGroup>
       </PaginationUl>
