@@ -1,30 +1,47 @@
 import styled from 'styled-components'
-import { theme } from '../../constants'
+import { breakpoints, theme } from '../../constants'
 
 export const ProductListWrapper = styled.div`
   width: 100%;
-  height: 70rem;
   grid-column: 5 / span 6;
   margin-top: 2.4rem;
   display: flex;
   flex-direction: column;
+
+  @media (max-width: ${breakpoints.wide}) {
+    grid-column: 2 / span 12;
+  }
 `
 
 export const ProductContainerWrapper = styled.div`
   height: 63rem;
-  background: #ffffff;
+  background: "#ffffff";
+
+  @media (max-width: ${breakpoints.mobile}) {
+    height: 50rem;
+  }
 
 `
 
 export const ProductContainer = styled.div`
   margin: 1.4rem;
   display: grid;
+  height: fit-content;
 
   grid-template-columns: repeat(4, 1fr);
-  /* flex-wrap: wrap;
-  justify-content: center; */
+  grid-template-rows: repeat(4, 1 fr);
   justify-items: center;
   grid-row-gap: 1.25rem;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    grid-template-columns: repeat(3, 1fr);
+    overflow-y: scroll;
+    grid-row-gap: 0.5rem;
+    overflow-x: hidden;
+
+  }
+
+
 `
 export const ItemTypeContainer = styled.div`
   margin-top: 1rem;

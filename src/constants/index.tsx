@@ -30,6 +30,11 @@ export const theme: ITheme = {
   line: '#f4f4f4',
 }
 
+export const breakpoints = {
+  mobile: '768px',
+  wide: '1366px',
+}
+
 export const baseURL: string = 'http://localhost:3004'
 export const defaultItemTypes: string[] = ['mug', 'shirt']
 

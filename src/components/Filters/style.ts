@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { theme } from '../../constants'
+import { breakpoints, theme } from '../../constants'
 
 interface IFilterTypeSelectionProps {
   isSort?: boolean
@@ -9,7 +9,7 @@ export const LabelCheckBox = styled.label`
   color: ${theme.blackFilterContainerText};
   font-size: 1.1rem;
   margin-left: 1rem;
-  font-size: .85rem;
+  font-size: 0.85rem;
 
   span {
     color: ${theme.lightGrayText};
@@ -50,7 +50,7 @@ export const ListContainer = styled.div<IFilterTypeSelectionProps>`
 
   display: flex;
   flex-direction: column;
-  row-gap: .8rem;
+  row-gap: 0.8rem;
 
   ::-webkit-scrollbar {
     width: 0.25rem;
@@ -92,7 +92,8 @@ export const FilterContainer = styled.div<IFilterTypeSelectionProps>`
 
 export const FilterLayout = styled.div`
   margin-top: 2.4rem;
-  width: 18.5rem;
+  /* width: 18.5rem; */
+  width: auto;
   row-gap: 1.2rem;
 
   grid-column: 2 / span 3;
@@ -100,4 +101,23 @@ export const FilterLayout = styled.div`
   display: flex;
   flex-direction: column;
   align-content: center;
+  flex-wrap: nowrap;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    grid-column: 2 / span 12;
+
+    /* display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap; */
+  }
+
+  @media (max-width: ${breakpoints.wide}) {
+    grid-column: 2 / span 12;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    column-gap: 1rem;
+  }
 `

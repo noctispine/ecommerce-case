@@ -1,11 +1,15 @@
 import styled from "styled-components";
-import { theme } from "../../constants";
+import { breakpoints, theme } from "../../constants";
 
 export const FooterLayout = styled.div`
     margin-top: 4.62rem;
     margin-bottom: 2.31rem;
-
-    grid-column: 5 / span 4;
+    grid-column: 6 / span 4;
+    
+    @media (max-width: ${breakpoints.mobile}) {
+        margin-top: 2rem;
+        
+    }
 `
 export const TextContainer = styled.div`
     display: flex;

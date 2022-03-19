@@ -1,10 +1,16 @@
 import styled from 'styled-components'
 import { isPropertySignature } from 'typescript'
-import { theme } from '../../../../constants'
+import { breakpoints, theme } from '../../../../constants'
 
 export const PaginationWrapper = styled.div`
-  margin: 2rem 3.25rem;
+  margin: 0rem 3.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  @media (max-width: ${breakpoints.mobile}) {
+    margin-top: 5rem;
+  }
 `
 
 interface PaginationItemProps {
@@ -14,11 +20,15 @@ interface PaginationItemProps {
 }
 
 export const PaginationItem = styled.div<PaginationItemProps>`
-  min-width: min-content;
+  min-width: 1rem;
   height: 1.2rem;
   padding: 0.75rem;
   margin: ${(props) => (!props.arrow ? '0 .2rem' : '')};
   font-size: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   color: ${(props) => (props.selected ? '#FFFFFF' : theme.smokeyGray)};
 
@@ -26,6 +36,12 @@ export const PaginationItem = styled.div<PaginationItemProps>`
   background: ${(props) => (props.selected ? theme.primary : '')};
   pointer-events: ${(props) => (props.disabled ? 'none' : '')};
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.mobile}) {
+    height: 0.8rem;
+    padding: 0.3rem;
+    font-size: 0.9rem;
+  }
 `
 export const PaginationUl = styled.div`
   display: flex;
@@ -37,9 +53,9 @@ interface IListItemGroupProps {
 }
 
 export const ListItemGroup = styled.div<IListItemGroupProps>`
-font-weight: ${(props) => props.arrow ? 'bold' : ''};
+  font-weight: ${(props) => (props.arrow ? 'bold' : '')};
   display: flex;
-  
+
   &:active {
     color: ${theme.primary};
   }

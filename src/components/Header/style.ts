@@ -6,6 +6,8 @@ export const HeaderContainer = styled.div`
   width: 100%;
   height: 4.75rem;
 
+  z-index: 200;
+
   display: grid;
   grid-template-columns: repeat(14, 1fr);
 
