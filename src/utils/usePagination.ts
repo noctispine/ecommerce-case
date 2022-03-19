@@ -49,14 +49,14 @@ export const usePagination: PaginationHook = ({
     const firstPageIndex = 1
 
     if (!shouldShowLeftDots && shouldShowRightDots) {
-      let leftItemCount = 3 + 2 * neighborCount
+      let leftItemCount = 1 + 2 * neighborCount
       let leftRange = range(1, leftItemCount)
 
       return [...leftRange, DOTS, totalPageCount]
     }
 
     if (shouldShowLeftDots && !shouldShowRightDots) {
-      let rightItemCount = 3 + 2 * neighborCount
+      let rightItemCount = 1 + 2 * neighborCount
       let rightRange = range(
         totalPageCount - rightItemCount + 1,
         totalPageCount - 1
@@ -65,7 +65,7 @@ export const usePagination: PaginationHook = ({
     }
 
     if (shouldShowLeftDots && shouldShowRightDots) {
-      let middleRange = range(leftNeighborIndex, rightNeighborIndex)
+      let middleRange = range(leftNeighborIndex , rightNeighborIndex - 1)
       return [firstPageIndex, DOTS, ...middleRange, DOTS, totalPageCount]
     }
   }, [totalCount, pageSize, neighborCount, currentPage])
