@@ -20,6 +20,7 @@ import {
   Button,
   ItemTypeContainer,
   ProductContainer,
+  ProductContainerWrapper,
   ProductListWrapper,
   Title,
 } from './style'
@@ -74,6 +75,8 @@ const sortProducts = (products: IProduct[], sortType: Sort) => {
 }
 
 const ProductList = (props: Props) => {
+  const [currentPage, setCurrentPage] = useState<number>(1)
+
   const productState = useSelector((state: RootState) => state.product)
   let products = productState.products
 
@@ -106,8 +109,6 @@ const ProductList = (props: Props) => {
     [sortType, brandFilteredProducts]
   )
 
-  const [currentPage, setCurrentPage] = useState<number>(1)
-
   // set current page to 1 if user sorts or filters
   useEffect(() => {
     setCurrentPage(1)
@@ -117,8 +118,18 @@ const ProductList = (props: Props) => {
   useEffect(() => {
     dispatch(productActionCreators.updateTags(brandFilteredProducts))
     dispatch(
-      companyActionCreators.updateCompaniesAndAmountsCreator(brandFilteredProducts)
+      companyActionCreators.updateCompaniesAndAmountsCreator(tagFilteredProducts)
     )
+
+    // if (productState.products.length === 0) {
+    //   dispatch(
+    //     companyActionCreators.updateCompaniesAndAmountsCreator(productState.products)
+    //   )
+    // } else {
+    //   dispatch(
+    //     companyActionCreators.updateCompaniesAndAmountsCreator(productState.products)
+    //   )
+    // }
   }, [tagFilteredProducts, brandFilteredProducts])
 
   const pageSize = 16
@@ -160,20 +171,22 @@ const ProductList = (props: Props) => {
       </ItemTypeContainer>
 
       {/* List Container */}
-      <ProductContainer>
-        {sortedProducts
-          .slice(
-            (currentPage - 1) * pageSize,
-            (currentPage - 1) * pageSize + pageSize
-          )
-          .map((product) => (
-            <ProductItem
-              key={product.added}
-              price={product.price}
-              name={product.name}
-            />
-          ))}
-      </ProductContainer>
+      <ProductContainerWrapper>
+        <ProductContainer>
+          {sortedProducts
+            .slice(
+              (currentPage - 1) * pageSize,
+              (currentPage - 1) * pageSize + pageSize
+            )
+            .map((product) => (
+              <ProductItem
+                key={product.added}
+                price={product.price}
+                name={product.name}
+              />
+            ))}
+        </ProductContainer>
+      </ProductContainerWrapper>
 
       {/* Pagination */}
       <Pagination
