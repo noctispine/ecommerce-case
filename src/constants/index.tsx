@@ -11,6 +11,7 @@ interface ITheme {
   smokeyGray: string
   htmlBackground: string
   scrollBarGray: string
+  line: string
 }
 
 export const theme: ITheme = {
@@ -26,6 +27,7 @@ export const theme: ITheme = {
   smokeyGray: '#697488',
   htmlBackground: '#FAFAFA',
   scrollBarGray: '#E0E0E0',
+  line: '#f4f4f4',
 }
 
 export const baseURL: string = 'http://localhost:3004'
