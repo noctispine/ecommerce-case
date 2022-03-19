@@ -8,7 +8,8 @@ import rootSaga from './redux/sagas/rootSaga'
 
 const sagaMiddleware = createSagaMiddleware()
 
-const middleware = [sagaMiddleware, logger]
+// const middleware = [sagaMiddleware, logger]
+const middleware = [sagaMiddleware]
 
 const store = createStore(rootReducer, applyMiddleware(...middleware))
 
