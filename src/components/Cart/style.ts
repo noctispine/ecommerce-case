@@ -40,7 +40,6 @@ export const TotalContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
 `
 
 export const CartList = styled.div`
@@ -64,6 +63,12 @@ export const CartList = styled.div`
     width: 0.8rem;
     height: 4.8rem;
   }
+`
+export const LineWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `
 
 export const Line = styled.div`

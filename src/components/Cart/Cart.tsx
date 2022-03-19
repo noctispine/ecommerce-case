@@ -2,7 +2,14 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { RootState } from '../../redux/reducers/rootReducer'
 import CartItem from './components/CartItem/CartItem'
-import { CartContainer, CartList, Line, TotalContainer, TotalWrapper } from './style'
+import {
+  CartContainer,
+  CartList,
+  Line,
+  LineWrapper,
+  TotalContainer,
+  TotalWrapper,
+} from './style'
 
 type Props = {}
 
@@ -15,7 +22,9 @@ const Cart = (props: Props) => {
         {items.map((item, indx) => (
           <>
             <CartItem key={indx} item={item} />
-            <Line />
+            <LineWrapper>
+              <Line />
+            </LineWrapper>
           </>
         ))}
       </CartList>
