@@ -121,15 +121,6 @@ const ProductList = (props: Props) => {
       companyActionCreators.updateCompaniesAndAmountsCreator(tagFilteredProducts)
     )
 
-    // if (productState.products.length === 0) {
-    //   dispatch(
-    //     companyActionCreators.updateCompaniesAndAmountsCreator(productState.products)
-    //   )
-    // } else {
-    //   dispatch(
-    //     companyActionCreators.updateCompaniesAndAmountsCreator(productState.products)
-    //   )
-    // }
   }, [tagFilteredProducts, brandFilteredProducts])
 
   const pageSize = 16
