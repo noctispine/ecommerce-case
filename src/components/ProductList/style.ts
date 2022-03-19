@@ -3,29 +3,33 @@ import { theme } from '../../constants'
 
 export const ProductListWrapper = styled.div`
   width: 100%;
-  height: 100%;
-  height: 67rem;
-  grid-column: 5 / span 4;
+  height: 70rem;
+  grid-column: 5 / span 6;
   margin-top: 2.4rem;
   display: flex;
   flex-direction: column;
 `
 
-export const ProductContainer = styled.div`
+export const ProductContainerWrapper = styled.div`
   height: 63rem;
   background: #ffffff;
-  padding: 1rem 0;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
 
-  gap: 1.2rem 1rem;
+`
+
+export const ProductContainer = styled.div`
+  margin: 1.4rem;
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+  /* flex-wrap: wrap;
+  justify-content: center; */
+  justify-items: center;
+  grid-row-gap: 1.25rem;
 `
 export const ItemTypeContainer = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: flex;
-  gap: 0 0.5rem;
 `
 
 interface IButtonProps {

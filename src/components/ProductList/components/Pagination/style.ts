@@ -15,7 +15,7 @@ interface PaginationItemProps {
 
 export const PaginationItem = styled.div<PaginationItemProps>`
   min-width: min-content;
-  height: 1rem;
+  height: 1.2rem;
   padding: 0.75rem;
   margin: ${(props) => (!props.arrow ? '0 .2rem' : '')};
   font-size: 1rem;

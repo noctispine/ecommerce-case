@@ -2,8 +2,7 @@ import styled from 'styled-components'
 import { theme } from '../../../../constants'
 
 export const TotalContainer = styled.div`
-  grid-column-end: 12;
-  width: 8rem;
+  grid-column: 13;
   background-color: ${theme.secondary};
 
   display: flex;

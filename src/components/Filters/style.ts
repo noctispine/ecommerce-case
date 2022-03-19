@@ -9,7 +9,7 @@ export const LabelCheckBox = styled.label`
   color: ${theme.blackFilterContainerText};
   font-size: 1.1rem;
   margin-left: 1rem;
-  font-size: .8rem;
+  font-size: .85rem;
 
   span {
     color: ${theme.lightGrayText};
@@ -32,7 +32,7 @@ export const CheckBox = styled.input`
 
 export const CheckBoxContainer = styled.div`
   display: flex;
-  align-content: center;
+  align-items: center;
 `
 
 export const RadioButtonContainer = styled.div`
@@ -95,7 +95,7 @@ export const FilterLayout = styled.div`
   width: 18.5rem;
   row-gap: 1.2rem;
 
-  grid-column: 2 / span 2;
+  grid-column: 2 / span 3;
 
   display: flex;
   flex-direction: column;
