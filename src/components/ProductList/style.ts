@@ -47,6 +47,7 @@ export const ItemTypeContainer = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: flex;
+  column-gap: .5rem;
 `
 
 interface IButtonProps {
