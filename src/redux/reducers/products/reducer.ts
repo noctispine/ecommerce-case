@@ -23,7 +23,7 @@ const initialState: IProductState = {
   products: [],
   tags: {
     tags: [],
-    total: 0,
+    total: 0, // this total shows the prodcuts length
   },
 
   error: null,

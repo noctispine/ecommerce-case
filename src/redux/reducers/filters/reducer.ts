@@ -35,7 +35,7 @@ export const REMOVE_FILTER_ITEMTYPE = 'REMOVE_FILTER_ITEMTYPE'
 export const REMOVE_ALL_FILTERS_FROM_SPECIFIC_TYPE =
   'REMOVE_ALL_FILTERS_FROM_SPECIFIC_TYPE'
 
-const initialState: IFilterState = {
+export const initialState: IFilterState = {
   brands: [],
   itemType: '',
   tags: [],
