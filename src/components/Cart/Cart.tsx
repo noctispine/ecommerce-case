@@ -19,7 +19,7 @@ const Cart = ({showCart}: Props) => {
   const cartState = useSelector((state: RootState) => state.cart)
   const items = cartState.items
   return (
-    <CartContainer showCart={showCart}>
+    <CartContainer showCart={showCart} className='cy test_cart'>
       <CartList>
         {items.map((item, indx) => (
           <>

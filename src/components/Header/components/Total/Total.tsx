@@ -13,7 +13,7 @@ const Total = ({ setShowCart, showCart }: Props) => {
 
   return (
     <TotalContainer>
-      <LogoContainer onClick={() => setShowCart(!showCart)}>
+      <LogoContainer onClick={() => setShowCart(!showCart)} className='cy set_show_cart'>
         <BsFillCartFill color="#ffffff" size={20} />
         <span className="totalVal">₺ {cartState.total}</span>
       </LogoContainer>

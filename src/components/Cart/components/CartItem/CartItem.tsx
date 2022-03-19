@@ -15,22 +15,24 @@ const CartItem = ({ item }: Props) => {
   const dispatch = useDispatch()
 
   return (
-    <ItemContainer>
+    <ItemContainer className="cy cart_item">
       <Info>
         <Text>{item.name}</Text>
         <Text>₺ {roundToTwo(item.price * item.quantity)}</Text>
       </Info>
       <QuantityContainer>
         <button
+          className='cy decrement'
           onClick={() =>
             dispatch(cartActionCreators.decrementCreator(item.name, item.price))
           }
         >
           {/* <div className="signs">-</div> */}
-          <AiOutlineMinus size="25"  />
+          <AiOutlineMinus size="25" />
         </button>
-        <div>{item.quantity}</div>
+        <div  className='cy quantity'>{item.quantity}</div>
         <button
+        className='cy increment'
           onClick={() =>
             dispatch(cartActionCreators.incrementCreator(item.name, item.price))
           }

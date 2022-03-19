@@ -13,7 +13,7 @@ const ProductItem = (props: Props) => {
   const dispatch = useDispatch()
 
   return (
-    <ProductItemContainer>
+    <ProductItemContainer className='test_product_item'>
       <ImageContainer />
       <Price>₺ {props.price}</Price>
       <Title>{props.name}</Title>
@@ -21,6 +21,7 @@ const ProductItem = (props: Props) => {
         onClick={() =>
           dispatch(cartActionCreators.incrementCreator(props.name, props.price))
         }
+        className='cy add_to_cart'
       >
         Add
       </Button>

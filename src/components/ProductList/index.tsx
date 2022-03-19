@@ -163,7 +163,7 @@ const ProductList = (props: Props) => {
 
       {/* List Container */}
       <ProductContainerWrapper>
-        <ProductContainer>
+        <ProductContainer className='cy test_product_list'>
           {sortedProducts
             .slice(
               (currentPage - 1) * pageSize,
