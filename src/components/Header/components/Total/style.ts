@@ -38,6 +38,11 @@ export const TotalContainer = styled.div`
 export const LogoContainer = styled.div`
   display: none !important;
   @media (max-width: ${breakpoints.wide}) {
+    padding-left: 5rem;
+    padding-right: 5rem;
     display: block !important;
+  }
+  @media (max-width: ${breakpoints.mobile}) {
+    padding: 0;
   }
 `

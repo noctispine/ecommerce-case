@@ -10,7 +10,7 @@ export const CartContainer = styled.div<ICartContainerProps>`
   margin-top: 2rem;
   position: sticky;
   top: 1rem;
-  height: 20rem;
+  height: 35vh;
   max-height: 70vh;
 
   overflow-x: hidden;
@@ -30,8 +30,13 @@ export const CartContainer = styled.div<ICartContainerProps>`
     right: 0;
 
     background-color: #ffffff;
-    height: 55vh;
+    height: 60vh;
     width: 50vw;
+  }
+
+  @media (max-width: ${breakpoints.mobile}) {
+    width: 80vw;
+    height: 63vh;
   }
 
   /* @media ((max-width: ${breakpoints.wide}) and min-width: ${breakpoints.mobile}) {
@@ -68,7 +73,7 @@ export const TotalContainer = styled.div`
 `
 
 export const CartList = styled.div`
-  height: 30rem;
+  height: 50vh;
   margin-top: 1.6rem;
   overflow-y: scroll;
 

@@ -17,8 +17,8 @@ export const ProductContainerWrapper = styled.div`
   height: 63rem;
   background: "#ffffff";
 
-  @media (max-width: ${breakpoints.mobile}) {
-    height: 50rem;
+  @media (max-width: ${breakpoints.wide}) {
+    height: fit-content;
   }
 
 `
@@ -34,9 +34,10 @@ export const ProductContainer = styled.div`
   grid-row-gap: 1.25rem;
 
   @media (max-width: ${breakpoints.mobile}) {
-    grid-template-columns: repeat(3, 1fr);
+    
+    grid-template-columns: repeat(2, 1fr);
     overflow-y: scroll;
-    grid-row-gap: 0.5rem;
+    grid-row-gap: 0.7rem;
     overflow-x: hidden;
 
   }
