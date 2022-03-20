@@ -115,21 +115,14 @@ const ProductList = (props: Props) => {
     setCurrentPage(1)
   }, [sortedProducts])
 
-  // update brands when products are fetched
-  useEffect(() => {
-    dispatch(
-      companyActionCreators.updateCompaniesAndAmountsCreator(products)
-    )
-  }, [products])
-
   // set new amounts for tags and brands
   useEffect(() => {
     dispatch(productActionCreators.updateTags(brandFilteredProducts))
+
     dispatch(
       companyActionCreators.updateCompaniesAndAmountsCreator(tagFilteredProducts)
     )
-    console.log('useffect')
-  }, [tagFilteredProducts, brandFilteredProducts, products])
+  }, [tagFilteredProducts, brandFilteredProducts])
 
   const pageSize = window.innerWidth > parseInt(breakpoints.mobile) ? 16 : 12
 
