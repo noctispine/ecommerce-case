@@ -35,7 +35,8 @@ export const breakpoints = {
   wide: '1366px',
 }
 
-export const baseURL = 'https://ecommerce-case.herokuapp.com/'
+export const baseURL = 'https://ecommerce-case.herokuapp.com/api/'
+
 export const defaultItemTypes: string[] = ['mug', 'shirt']
 
 export const PRICE_LOW_TO_HIGH = 'PRICE_LOW_TO_HIGH'
