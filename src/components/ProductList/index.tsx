@@ -118,7 +118,7 @@ const ProductList = (props: Props) => {
   // update brands when products are fetched
   useEffect(() => {
     dispatch(
-      companyActionCreators.updateCompaniesAndAmountsCreator(tagFilteredProducts)
+      companyActionCreators.updateCompaniesAndAmountsCreator(products)
     )
   }, [products])
 
