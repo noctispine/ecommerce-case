@@ -1,5 +1,6 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { companyActionCreators } from '../../../../redux/reducers/companies/reducer'
 import { RootState } from '../../../../redux/reducers/rootReducer'
 import { FilterContainer, InputContainer } from '../../style'
 import SharedSearchFilter from '../SharedComponents/SharedSearchFilter'
@@ -10,10 +11,20 @@ const Brands = (props: Props) => {
   const companyState = useSelector((state: RootState) => state.company)
   const companiesWithAmounts = companyState.companiesWithAmounts
   const companyTotal = companyState.total
+  const dispatch = useDispatch()
 
+  const productState = useSelector((state: RootState) => state.product)
+
+  // compute companies after fetch
+  useEffect(() => {
+    dispatch(
+      companyActionCreators.updateCompaniesAndAmountsCreator(productState.products)
+    )
+  }, [productState.products, companyState.companies])
 
   const filterState = useSelector((state: RootState) => state.filter)
   const brandFilter = filterState.brands
+
   return (
     <FilterContainer>
       Brands
@@ -30,3 +41,8 @@ const Brands = (props: Props) => {
 }
 
 export default Brands
+function tagFilteredProducts(
+  tagFilteredProducts: any
+): import('../../../../redux/reducers/companies/reducerHelpers').IUpdateCompaniesWithAmountsAction {
+  throw new Error('Function not implemented.')
+}
