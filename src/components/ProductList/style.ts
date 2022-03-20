@@ -15,12 +15,11 @@ export const ProductListWrapper = styled.div`
 
 export const ProductContainerWrapper = styled.div`
   height: 63rem;
-  background: "#ffffff";
+  background: '#ffffff';
 
   @media (max-width: ${breakpoints.wide}) {
     height: fit-content;
   }
-
 `
 
 export const ProductContainer = styled.div`
@@ -34,21 +33,17 @@ export const ProductContainer = styled.div`
   grid-row-gap: 1.25rem;
 
   @media (max-width: ${breakpoints.mobile}) {
-    
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr) !important;
     overflow-y: scroll;
-    grid-row-gap: .75rem;
+    grid-row-gap: 0.75rem;
     overflow-x: hidden;
-
   }
-
-
 `
 export const ItemTypeContainer = styled.div`
   margin-top: 1rem;
   margin-bottom: 1rem;
   display: flex;
-  column-gap: .5rem;
+  column-gap: 0.5rem;
 `
 
 interface IButtonProps {
