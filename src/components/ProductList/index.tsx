@@ -115,13 +115,21 @@ const ProductList = (props: Props) => {
     setCurrentPage(1)
   }, [sortedProducts])
 
-  // set new amounts of tags and brands
+  // update brands when products are fetched
+  useEffect(() => {
+    dispatch(
+      companyActionCreators.updateCompaniesAndAmountsCreator(tagFilteredProducts)
+    )
+  }, [products])
+
+  // set new amounts for tags and brands
   useEffect(() => {
     dispatch(productActionCreators.updateTags(brandFilteredProducts))
     dispatch(
       companyActionCreators.updateCompaniesAndAmountsCreator(tagFilteredProducts)
     )
-  }, [tagFilteredProducts, brandFilteredProducts])
+    console.log('useffect')
+  }, [tagFilteredProducts, brandFilteredProducts, products])
 
   const pageSize = window.innerWidth > parseInt(breakpoints.mobile) ? 16 : 12
 
@@ -163,7 +171,7 @@ const ProductList = (props: Props) => {
 
       {/* List Container */}
       <ProductContainerWrapper>
-        <ProductContainer className='cy test_product_list'>
+        <ProductContainer className="cy test_product_list">
           {sortedProducts
             .slice(
               (currentPage - 1) * pageSize,

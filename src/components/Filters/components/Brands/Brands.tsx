@@ -11,16 +11,6 @@ const Brands = (props: Props) => {
   const companyState = useSelector((state: RootState) => state.company)
   const companiesWithAmounts = companyState.companiesWithAmounts
   const companyTotal = companyState.total
-  const dispatch = useDispatch()
-
-  const productState = useSelector((state: RootState) => state.product)
-
-  // compute companies after fetch
-  useEffect(() => {
-    dispatch(
-      companyActionCreators.updateCompaniesAndAmountsCreator(productState.products)
-    )
-  }, [productState.products, companyState.companies])
 
   const filterState = useSelector((state: RootState) => state.filter)
   const brandFilter = filterState.brands
