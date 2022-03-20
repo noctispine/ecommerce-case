@@ -1,11 +1,11 @@
 # Folder Structure
-
+```bash
 ├── cypress
 ├── public
 └── src
-
+```
 - All e2e tests are can be found in cypress
-
+```bash
 └── src
     ├── components
     ├── constants
@@ -13,12 +13,12 @@
     ├── images
     ├── redux
     └── utils
-
+```
 - /db: nodejs server that serves build file.
 - /images: includes several images from the provided design for the case.
 - /utils: some additional helper functions
 
-
+```bash
 ./src/
 ├── components
 │   ├── Cart
@@ -34,9 +34,10 @@
 │   └── Styles
 │       ├── GlobalStyles
 │       └── Layout
-
+```
 - /components: Each component may have an another /components folder which includes sub-components.
 
+``` bash
 ./src/redux/
 ├── reducers
 │   ├── cart
@@ -48,6 +49,7 @@
 └── sagas
     ├── company
     └── product
+```
 
 - Some reducers have a reducerHelper file that provides types and some functions to keep clean the main reducer files.
 
