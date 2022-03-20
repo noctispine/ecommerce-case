@@ -115,14 +115,18 @@ const ProductList = (props: Props) => {
     setCurrentPage(1)
   }, [sortedProducts])
 
+
+
   // set new amounts for tags and brands
+  // companies added to dependency list in order to
+  // calculated companies with amounts after the fetch
   useEffect(() => {
     dispatch(productActionCreators.updateTags(brandFilteredProducts))
 
     dispatch(
       companyActionCreators.updateCompaniesAndAmountsCreator(tagFilteredProducts)
     )
-  }, [tagFilteredProducts, brandFilteredProducts])
+  }, [tagFilteredProducts, brandFilteredProducts, companies])
 
   const pageSize = window.innerWidth > parseInt(breakpoints.mobile) ? 16 : 12
 
