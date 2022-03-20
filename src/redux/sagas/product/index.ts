@@ -18,6 +18,7 @@ function* onLoadProducts() {
     const response: AxiosResponse = yield call(fetchItems)
 
     yield put(productActionCreators.fetchSuccess(response.data))
+    yield put(productActionCreators.updateTags(response.data))
   } catch (error) {
     if (error instanceof Error) {
       yield put(productActionCreators.fetchFail(error.message))
