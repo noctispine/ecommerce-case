@@ -9,7 +9,7 @@ export const PaginationWrapper = styled.div`
   align-items: center;
 
   @media (max-width: ${breakpoints.mobile}) {
-    margin-top: 5rem;
+    margin-top: 3rem;
   }
 `
 

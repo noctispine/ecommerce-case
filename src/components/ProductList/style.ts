@@ -37,7 +37,7 @@ export const ProductContainer = styled.div`
     
     grid-template-columns: repeat(2, 1fr);
     overflow-y: scroll;
-    grid-row-gap: 0.7rem;
+    grid-row-gap: .75rem;
     overflow-x: hidden;
 
   }
