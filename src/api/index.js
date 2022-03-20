@@ -12,7 +12,7 @@ server.use(middlewares)
 
 server.use(
   jsonServer.rewriter({
-    '/db/*': '/$1',
+    '/api/*': '/$1',
   })
 )
 server.use(router)
