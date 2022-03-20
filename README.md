@@ -1,6 +1,59 @@
-# Getting Started with Create React App
+# Folder Structure
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+├── cypress
+├── public
+└── src
+
+- All e2e tests are can be found in cypress
+
+└── src
+    ├── components
+    ├── constants
+    ├── db
+    ├── images
+    ├── redux
+    └── utils
+
+- /db: nodejs server that serves build file.
+- /images: includes several images from the provided design for the case.
+- /utils: some additional helper functions
+
+
+./src/
+├── components
+│   ├── Cart
+│   │   └── components
+│   ├── Filters
+│   │   └── components
+│   ├── Footer
+│   │   └── components
+│   ├── Header
+│   │   └── components
+│   ├── ProductList
+│   │   └── components
+│   └── Styles
+│       ├── GlobalStyles
+│       └── Layout
+
+- /components: Each component may have an another /components folder which includes sub-components.
+
+./src/redux/
+├── reducers
+│   ├── cart
+│   ├── companies
+│   ├── filters
+│   ├── mocks
+│   ├── products
+│   └── sort
+└── sagas
+    ├── company
+    └── product
+
+- Some reducers have a reducerHelper file that provides types and some functions to keep clean the main reducer files.
+
+
+
+
 
 ## Available Scripts
 
@@ -39,8 +92,6 @@ Instead, it will copy all the configuration files and the transitive dependencie
 
 You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+### `npm run cp-test`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Run cypress tests
