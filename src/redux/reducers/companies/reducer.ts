@@ -48,7 +48,6 @@ const companiesReducer: Reducer<ICompanyState, FetchCompaniesAction> = (
         state.companies,
         action.payload
       )
-      console.log(companiesWithAmounts)
       return {
         ...state,
         companiesWithAmounts: companiesWithAmounts.companiesWithAmounts,
