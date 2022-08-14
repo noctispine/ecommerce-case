@@ -4,7 +4,7 @@
 ├── public
 └── src
 ```
-- All e2e tests are can be found in cypress
+- All e2e tests can be found in cypress
 ```bash
 └── src
     ├── components
